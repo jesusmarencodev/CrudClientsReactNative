@@ -1,0 +1,25 @@
+{
+  "clientes": [
+    {
+      "nombre": "2wwwwww",
+      "telefono": "Eeeeeee",
+      "empresa": "Rrrrrrd",
+      "correo": "Rrrrr",
+      "id": 1
+    },
+    {
+      "nombre": "2wwwwww",
+      "telefono": "Eeeeeee",
+      "empresa": "Rrrrrrd",
+      "correo": "Rrrrr",
+      "id": 2
+    },
+    {
+      "nombre": "2wwwwww",
+      "telefono": "Eeeeeee",
+      "empresa": "Rrrrrrd",
+      "correo": "Rrrrr",
+      "id": 3
+    }
+  ]
+}
