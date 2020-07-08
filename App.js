@@ -44,10 +44,10 @@ const App = () => {
             name="Inicio" 
             component={Inicio}
             options={({navigation, route}) => ({
-              headerLeft : (props) => <BarraSuperior {...props}//pasando los props para la navegacion(route, navigation)
+/*               headerLeft : (props) => <BarraSuperior {...props}//pasando los props para la navegacion(route, navigation)
                                     navigation={navigation}
                                     route={route}
-                                />
+                                /> */
             })}
           />
           <Stack.Screen

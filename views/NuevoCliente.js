@@ -4,7 +4,9 @@ import { Provider as PaperProvider, TextInput, Headline, Button, Paragraph, Dial
 import axios from 'axios';
 import globalStyles from '../styles/global';
 
-const NuevoCliente = ({navigation}) => {
+const NuevoCliente = ({navigation, route}) => {
+
+    const { setConsultarAPI } = route.params;
 
     const [nombre, setNombre] = useState('')
     const [telefono, setTelefono] = useState('')
@@ -49,6 +51,7 @@ const NuevoCliente = ({navigation}) => {
             }else{
                 //la direccion para android es esta
                 await axios.post('http://192.168.1.68:3000/clientes', cliente)
+                setConsultarAPI(true);
             }
         } catch (error) {
             console.log(error)

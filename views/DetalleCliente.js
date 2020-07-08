@@ -1,7 +1,8 @@
 import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 
-const DetalleCliente = () => {
+const DetalleCliente = ({route}) => {
+    console.log(route)
     return (
         <View>
             <Text>Detalle Cliente</Text>
