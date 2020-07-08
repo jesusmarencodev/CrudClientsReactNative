@@ -47,13 +47,14 @@ const Inicio = ({navigation}) => {
                     <List.Item
                         title={item.nombre}
                         description={item.empresa}
-                        onPress={()=> navigation.navigate('DetalleCliente', {item})}
+                        onPress={()=> navigation.navigate('DetalleCliente', {item, setConsultarAPI})}
+                        setConsultarAPI
                     />
                 )}
            />
            <FAB
                 icon='plus'
-                style={styles.fa}
+                style={globalStyles.fa}
                 onPress={()=> navigation.navigate('NuevoCliente', {setConsultarAPI})}
            />
 
@@ -64,10 +65,5 @@ const Inicio = ({navigation}) => {
 export default Inicio
 
 const styles = StyleSheet.create({
-    fa : {
-        position : 'absolute',
-        margin : 20,
-        right : 0,
-        bottom : 0
-    }
+
 })

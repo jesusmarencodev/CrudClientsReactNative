@@ -1,10 +1,12 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import { StyleSheet, Text, View, Platform } from 'react-native'
 import { Provider as PaperProvider, TextInput, Headline, Button, Paragraph, Dialog, Portal} from 'react-native-paper';
 import axios from 'axios';
 import globalStyles from '../styles/global';
 
 const NuevoCliente = ({navigation, route}) => {
+
+    console.log(route.params)
 
     const { setConsultarAPI } = route.params;
 
@@ -13,6 +15,21 @@ const NuevoCliente = ({navigation, route}) => {
     const [correo, setCorreo] = useState('')
     const [empresa, setEmpresa] = useState('')
     const [alerta, setAlerta] = useState(false)
+
+    //Detectar si es edicion o nuevo cliente
+    useEffect(()=> {
+        if ( route.params.cliente ) {
+            console.log("ESTAMOS EDITANDO")
+            const { nombre, telefono, correo, empresa } = route.params.cliente;
+            setNombre(nombre);
+            setTelefono(telefono);
+            setCorreo(correo);
+            setEmpresa(empresa);
+
+        }else{
+            console.log("ESTAMOS CREANDO UN NUEVO CLIENTE")
+        }
+    },[])
 
 
     const guardarNombre = (texto) => {
@@ -40,22 +57,39 @@ const NuevoCliente = ({navigation, route}) => {
         //generar cliente
 
         const cliente = {nombre, telefono, empresa, correo};
-        console.log(cliente)
 
-        //guardar cliente en la API
-
-        try {
-            if(Platform.OS === 'ios' ){
-                //la direccion para ios cambia no es esta solo la dejo com ejemplo
-                await axios.post('http://10.0.2.2:3000/clientes', cliente)
-            }else{
-                //la direccion para android es esta
-                await axios.post('http://192.168.1.68:3000/clientes', cliente)
-                setConsultarAPI(true);
+        if(route.params.cliente){
+            //guardar cliente nuevo en la API
+            const { id } = route.params.cliente;
+            try {
+                if(Platform.OS === 'ios' ){
+                    //la direccion para ios cambia no es esta solo la dejo com ejemplo
+                    await axios.put(`http://10.0.2.2:3000/clientes/${id}`, cliente)
+                }else{
+                    const url = `http://192.168.1.68:3000/clientes/${id}`;
+                    //la direccion para android es esta
+                    await axios.put(url, cliente)
+                    setConsultarAPI(true);
+                }
+            } catch (error) {
+                console.log(error)
             }
-        } catch (error) {
-            console.log(error)
+        }else{
+            //guardar cliente nuevo en la API
+            try {
+                if(Platform.OS === 'ios' ){
+                    //la direccion para ios cambia no es esta solo la dejo com ejemplo
+                    await axios.post('http://10.0.2.2:3000/clientes', cliente)
+                }else{
+                    //la direccion para android es esta
+                    await axios.post('http://192.168.1.68:3000/clientes', cliente)
+                    setConsultarAPI(true);
+                }
+            } catch (error) {
+                console.log(error)
+            }
         }
+
         
         //redireccionar
 
